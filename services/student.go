@@ -8,24 +8,24 @@ import (
 	"time"
 )
 
-type studentService struct {
+type StudentService struct {
 	r repositories.Student
 }
 
-func StudentService(r repositories.Student) *studentService {
-	return &studentService{r}
+func NewStudent(r repositories.Student) *StudentService {
+	return &StudentService{r}
 }
 
 type Student interface {
 	Add(input inputs.AddStudent) (entities.Student, error)
 }
 
-func (s *studentService) Add(input inputs.AddStudent) (entities.Student, error) {
+func (s *StudentService) Add(input inputs.AddStudent) (entities.Student, error) {
 	data, err := s.r.Add(
 		entities.Student{
 			Id:        uuid.NewString(),
 			FullName:  input.FullName,
-			SIDN:      input.SIDN,
+			SIN:       input.SIN,
 			Password:  input.Password,
 			CreatedAt: time.Now(),
 			UpdatedAt: time.Now(),

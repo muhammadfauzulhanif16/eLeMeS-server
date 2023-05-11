@@ -10,9 +10,9 @@ import (
 
 var (
 	db                = config.Db()
-	studentRepository = repositories.StudentRepository(db)
-	studentService    = services.StudentService(studentRepository)
-	studentHandler    = handlers.StudentHandler(studentService)
+	studentRepository = repositories.NewStudent(db)
+	studentService    = services.NewStudent(studentRepository)
+	studentHandler    = handlers.NewStudent(studentService)
 )
 
 func Student(r *gin.Engine) {

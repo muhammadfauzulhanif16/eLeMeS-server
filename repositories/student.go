@@ -5,19 +5,19 @@ import (
 	"gorm.io/gorm"
 )
 
-type studentRepository struct {
+type StudentRepository struct {
 	db *gorm.DB
 }
 
-func StudentRepository(db *gorm.DB) *studentRepository {
-	return &studentRepository{db}
+func NewStudent(db *gorm.DB) *StudentRepository {
+	return &StudentRepository{db}
 }
 
 type Student interface {
 	Add(data entities.Student) (entities.Student, error)
 }
 
-func (r *studentRepository) Add(data entities.Student) (entities.Student, error) {
+func (r *StudentRepository) Add(data entities.Student) (entities.Student, error) {
 	if err := r.db.Create(&data).Error; err != nil {
 		return data, err
 	}

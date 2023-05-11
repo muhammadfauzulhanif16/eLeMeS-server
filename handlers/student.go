@@ -7,15 +7,15 @@ import (
 	"net/http"
 )
 
-type studentHandler struct {
+type StudentHandler struct {
 	s services.Student
 }
 
-func StudentHandler(s services.Student) *studentHandler {
-	return &studentHandler{s}
+func NewStudent(s services.Student) *StudentHandler {
+	return &StudentHandler{s}
 }
 
-func (h *studentHandler) Add(c *gin.Context) {
+func (h *StudentHandler) Add(c *gin.Context) {
 	var input inputs.AddStudent
 
 	if err := c.ShouldBindJSON(&input); err != nil {
