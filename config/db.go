@@ -16,19 +16,19 @@ func Db() *gorm.DB {
 	dbHost := os.Getenv("DB_HOST")
 	dbPort := os.Getenv("DB_PORT")
 	dbName := os.Getenv("DB_Name")
-
+	
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", dbUser, dbPass, dbHost, dbPort, dbName)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		panic("failed to connect database")
+		panic(err)
 	}
-
+	
 	err = db.AutoMigrate(
 		&entities.Student{},
 	)
 	if err != nil {
 		return nil
 	}
-
+	
 	return db
 }
